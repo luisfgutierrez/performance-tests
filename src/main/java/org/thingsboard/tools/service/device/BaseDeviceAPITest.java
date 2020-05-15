@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public abstract class BaseDeviceAPITest implements DeviceAPITest {
 
-    static String dataAsStr = "{\"longKey\":73}";
+    static String dataAsStr = "{\"id_device\":1,\"msg_id\":1,\"ts\":1589400248,\"data\":[{\"cid\":1,\"fv\":0.9469},{\"cid\":2,\"fv\":0.975},{\"cid\":3,\"fv\":0.9628},{\"cid\":4,\"fv\":0.9818},{\"cid\":5,\"fv\":0.9944},{\"cid\":6,\"fv\":0.9369},{\"cid\":7,\"fv\":0.915},{\"cid\":8,\"fv\":0.8628},{\"cid\":9,\"fv\":0.1018},{\"cid\":10,\"fv\":0.9941},{\"cid\":11,\"fv\":0.1539},{\"cid\":12,\"fv\":0.125}]}";
     static byte[] data = dataAsStr.getBytes(StandardCharsets.UTF_8);
 
     static ObjectMapper mapper = new ObjectMapper();

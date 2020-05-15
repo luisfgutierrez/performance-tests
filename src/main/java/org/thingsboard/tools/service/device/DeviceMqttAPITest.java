@@ -98,6 +98,7 @@ public class DeviceMqttAPITest extends BaseDeviceAPITest {
     private MqttClient initClient(String token) throws Exception {
         MqttClientConfig config = new MqttClientConfig(getSslContext());
         config.setUsername(token);
+		config.setPassword("f3d76b4f-4d66-3e6c-9329-936b725eb99c");
         MqttClient client = MqttClient.create(config, null);
         client.setEventLoop(EVENT_LOOP_GROUP);
         Future<MqttConnectResult> connectFuture = client.connect(mqttHost, mqttPort);
@@ -135,7 +136,7 @@ public class DeviceMqttAPITest extends BaseDeviceAPITest {
             i++;
             schedulerExecutor.scheduleAtFixedRate(() -> {
                 try {
-                    mqttClient.publish("v1/devices/me/telemetry", Unpooled.wrappedBuffer(data), MqttQoS.AT_LEAST_ONCE)
+                    mqttClient.publish("isipoint/devices/1/predictions", Unpooled.wrappedBuffer(data), MqttQoS.AT_LEAST_ONCE)
                             .addListener(future -> {
                                         if (future.isSuccess()) {
                                             successPublishedCount.getAndIncrement();
@@ -230,7 +231,7 @@ public class DeviceMqttAPITest extends BaseDeviceAPITest {
             final int delayPause = (int) ((double) publishTelemetryPause / mqttClients.size() * idx);
             idx++;
             warmUpExecutor.schedule(() -> {
-                mqttClient.publish("v1/devices/me/telemetry", Unpooled.wrappedBuffer(data), MqttQoS.AT_LEAST_ONCE)
+                mqttClient.publish("isipoint/devices/1/predictions", Unpooled.wrappedBuffer(data), MqttQoS.AT_LEAST_ONCE)
                         .addListener(future -> {
                                     if (future.isSuccess()) {
                                         log.debug("Message was successfully published to device: {}", mqttClient.getClientConfig().getUsername());
